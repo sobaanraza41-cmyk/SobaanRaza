@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4285f4">
+  <meta name="description" content="Google World — explore useful apps and fun games in one colourful place.">
+  <title>Google World | Apps & Games</title>
+  <style>
+    :root {
+      --blue:#4285f4; --red:#ea4335; --yellow:#fbbc05; --green:#34a853;
+      --ink:#17233b; --muted:#68758c; --surface:#ffffff; --bg:#f4f7ff;
+      --line:#e8edf7; --shadow:0 12px 35px rgba(39,65,120,.10);
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; color:var(--ink); background:
+        radial-gradient(circle at 8% 0%, rgba(66,133,244,.13), transparent 27rem),
+        radial-gradient(circle at 95% 8%, rgba(251,188,5,.14), transparent 24rem), var(--bg);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color:inherit; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; max-width:1180px; margin:auto; padding:22px 24px; }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:850; font-size:1.25rem; letter-spacing:-.6px; }
+    .brand-mark { width:39px; height:39px; display:grid; place-items:center; border-radius:13px; color:white; font-size:1.2rem; background:conic-gradient(from 210deg,var(--blue),var(--green),var(--yellow),var(--red),var(--blue)); box-shadow:0 6px 15px #4285f444; }
+    nav { display:flex; gap:8px; flex-wrap:wrap; }
+    nav a { text-decoration:none; padding:9px 13px; border-radius:999px; color:#4c5b75; font-size:.92rem; font-weight:650; }
+    nav a:hover { background:#e8efff; color:var(--blue); }
+    .hero { max-width:1180px; margin:14px auto 34px; padding:50px 24px 42px; text-align:center; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; border:1px solid #dce7ff; color:#2869cb; background:#fff; padding:8px 13px; border-radius:999px; font-size:.82rem; font-weight:750; }
+    h1 { font-size:clamp(2.6rem,7vw,5.1rem); letter-spacing:-3px; line-height:1.03; margin:20px 0 14px; }
+    .gradient-text { background:linear-gradient(95deg,#4285f4 10%,#8b5cf6 45%,#ea4335 78%,#fbbc05); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero p { max-width:620px; margin:0 auto; color:var(--muted); font-size:1.08rem; line-height:1.7; }
+    .search-wrap { max-width:650px; margin:27px auto 0; position:relative; }
+    .search-wrap span { position:absolute; left:18px; top:50%; transform:translateY(-50%); font-size:1.15rem; }
+    #search { width:100%; border:1px solid #dfe6f3; background:white; border-radius:17px; padding:17px 18px 17px 49px; font:inherit; outline:none; box-shadow:var(--shadow); }
+    #search:focus { border-color:var(--blue); box-shadow:0 0 0 4px #4285f41c; }
+    .quick-stats { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:20px; }
+    .stat { background:#ffffffb8; border:1px solid var(--line); padding:8px 12px; border-radius:12px; color:#596780; font-size:.83rem; }
+    main { max-width:1180px; margin:auto; padding:0 24px 60px; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:30px 0 17px; }
+    .section-head h2 { margin:0; font-size:1.7rem; letter-spacing:-.8px; }
+    .section-head p { margin:5px 0 0; color:var(--muted); font-size:.93rem; }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 20px; }
+    .filter { border:1px solid #dfe6f3; background:white; padding:9px 14px; border-radius:999px; color:#53617a; font:inherit; font-size:.88rem; font-weight:700; cursor:pointer; }
+    .filter.active,.filter:hover { background:var(--ink); color:white; border-color:var(--ink); }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:18px; box-shadow:0 5px 20px #233c6810; display:flex; flex-direction:column; min-height:220px; transition:transform .18s,box-shadow .18s; }
+    .card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+    .card-top { display:flex; align-items:center; gap:12px; }
+    .app-icon { width:51px; height:51px; flex:0 0 51px; display:grid; place-items:center; border-radius:16px; font-size:1.55rem; background:var(--tint,#eaf1ff); }
+    .card h3 { margin:0; font-size:1.02rem; }
+    .type { color:var(--muted); font-size:.78rem; margin-top:4px; }
+    .card p { color:#65728a; line-height:1.55; font-size:.88rem; margin:15px 0 18px; flex:1; }
+    .card a { display:inline-flex; justify-content:center; align-items:center; text-decoration:none; border-radius:11px; padding:10px 12px; background:#edf3ff; color:#2468cb; font-weight:750; font-size:.86rem; }
+    .card a:hover { background:#dce9ff; }
+    .empty { display:none; text-align:center; padding:32px; color:var(--muted); background:white; border:1px dashed #ccd7ea; border-radius:18px; }
+    .note { margin:30px 0 0; padding:17px 19px; border-radius:16px; background:#fff8e5; border:1px solid #f6e5ad; color:#705719; font-size:.84rem; line-height:1.6; }
+    footer { border-top:1px solid var(--line); background:#ffffffa8; text-align:center; padding:24px; color:#758198; font-size:.83rem; }
+    footer strong { color:#46536b; }
+    @media (max-width:900px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:560px) {
+      .topbar { padding:16px; align-items:flex-start; flex-direction:column; }
+      nav { gap:2px; } nav a { padding:8px 10px; }
+      .hero { padding:36px 18px 28px; margin-top:0; } h1 { letter-spacing:-1.8px; }
+      main { padding:0 16px 42px; } .grid { grid-template-columns:1fr; }
+      .section-head { align-items:start; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Google World home" style="text-decoration:none">
+      <span class="brand-mark">✦</span><span>Google <span style="color:#4285f4">World</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#apps">Apps</a><a href="#games">Games</a><a href="#about">About</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">🌈 Your colourful digital hub</span>
+    <h1>Explore more.<br><span class="gradient-text">Play more.</span></h1>
+    <p>Discover useful apps and exciting games, all collected in one simple place. Find something new to try today!</p>
+    <div class="search-wrap"><span>🔎</span><input id="search" type="search" placeholder="Search apps and games..." aria-label="Search apps and games"></div>
+    <div class="quick-stats"><span class="stat">📱 Useful apps</span><span class="stat">🎮 Fun games</span><span class="stat">✨ Easy to explore</span></div>
+  </section>
+
+  <main>
+    <div class="filters" aria-label="Content filters">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="app">Apps</button>
+      <button class="filter" data-filter="game">Games</button>
+    </div>
+
+    <section id="apps">
+      <div class="section-head"><div><h2>📱 Explore Apps</h2><p>Helpful tools for learning, creating and staying connected.</p></div></div>
+      <div class="grid" id="appGrid">
+        <article class="card" data-kind="app" data-search="gmail email messages">
+          <div class="card-top"><div class="app-icon" style="--tint:#fff0ed">✉️</div><div><h3>Gmail</h3><div class="type">Email</div></div></div>
+          <p>Send, receive and organise email messages.</p><a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer">Visit Gmail ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="youtube videos music learning">
+          <div class="card-top"><div class="app-icon" style="--tint:#ffeded">▶️</div><div><h3>YouTube</h3><div class="type">Video platform</div></div></div>
+          <p>Watch videos, tutorials, music and educational content.</p><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Visit YouTube ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="google maps navigation places">
+          <div class="card-top"><div class="app-icon" style="--tint:#e9f7ee">🗺️</div><div><h3>Google Maps</h3><div class="type">Maps & navigation</div></div></div>
+          <p>Explore places and plan journeys with maps.</p><a href="https://maps.google.com/" target="_blank" rel="noopener noreferrer">Visit Maps ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="google drive files cloud storage">
+          <div class="card-top"><div class="app-icon" style="--tint:#fff7df">📁</div><div><h3>Google Drive</h3><div class="type">Cloud storage</div></div></div>
+          <p>Store and organise files online.</p><a href="https://drive.google.com/" target="_blank" rel="noopener noreferrer">Visit Drive ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="google photos pictures albums">
+          <div class="card-top"><div class="app-icon" style="--tint:#f0ebff">🖼️</div><div><h3>Google Photos</h3><div class="type">Photos</div></div></div>
+          <p>Back up, organise and find your photos.</p><a href="https://photos.google.com/" target="_blank" rel="noopener noreferrer">Visit Photos ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="google translate language translation">
+          <div class="card-top"><div class="app-icon" style="--tint:#eaf2ff">🌐</div><div><h3>Google Translate</h3><div class="type">Languages</div></div></div>
+          <p>Translate words and phrases between languages.</p><a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">Visit Translate ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="google docs documents writing">
+          <div class="card-top"><div class="app-icon" style="--tint:#eaf2ff">📄</div><div><h3>Google Docs</h3><div class="type">Documents</div></div></div>
+          <p>Create and edit documents online.</p><a href="https://docs.google.com/" target="_blank" rel="noopener noreferrer">Visit Docs ↗</a>
+        </article>
+        <article class="card" data-kind="app" data-search="google classroom school education">
+          <div class="card-top"><div class="app-icon" style="--tint:#e9f7ee">🎓</div><div><h3>Google Classroom</h3><div class="type">Education</div></div></div>
+          <p>Keep classwork and learning resources organised.</p><a href="https://classroom.google.com/" target="_blank" rel="noopener noreferrer">Visit Classroom ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="games">
+      <div class="section-head"><div><h2>🎮 Discover Games</h2><p>Explore popular games and visit their official pages.</p></div></div>
+      <div class="grid" id="gameGrid">
+        <article class="card" data-kind="game" data-search="minecraft building adventure sandbox">
+          <div class="card-top"><div class="app-icon" style="--tint:#eaf5e8">⛏️</div><div><h3>Minecraft</h3><div class="type">Creative sandbox</div></div></div>
+          <p>Build, explore and create in a block-based world.</p><a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="roblox games experiences create">
+          <div class="card-top"><div class="app-icon" style="--tint:#f0f1f5">🧩</div><div><h3>Roblox</h3><div class="type">Online experiences</div></div></div>
+          <p>Explore a wide variety of user-created experiences.</p><a href="https://www.roblox.com/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="subway surfers running arcade">
+          <div class="card-top"><div class="app-icon" style="--tint:#fff2e4">🏃</div><div><h3>Subway Surfers</h3><div class="type">Endless runner</div></div></div>
+          <p>Dash through colourful tracks in this arcade game.</p><a href="https://subwaysurfers.com/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="angry birds puzzle slingshot">
+          <div class="card-top"><div class="app-icon" style="--tint:#ffeded">🐦</div><div><h3>Angry Birds</h3><div class="type">Puzzle / arcade</div></div></div>
+          <p>Enjoy a playful series of physics-based puzzles.</p><a href="https://www.angrybirds.com/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="pokemon go explore adventure">
+          <div class="card-top"><div class="app-icon" style="--tint:#fff8df">⚡</div><div><h3>Pokémon GO</h3><div class="type">Location-based adventure</div></div></div>
+          <p>Discover Pokémon through a real-world adventure game.</p><a href="https://pokemongolive.com/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="chess strategy board game">
+          <div class="card-top"><div class="app-icon" style="--tint:#eeeaff">♟️</div><div><h3>Chess.com</h3><div class="type">Strategy / board game</div></div></div>
+          <p>Play chess, practise tactics and learn strategies.</p><a href="https://www.chess.com/" target="_blank" rel="noopener noreferrer">Visit Chess.com ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="tetris puzzle blocks">
+          <div class="card-top"><div class="app-icon" style="--tint:#eaf2ff">🟦</div><div><h3>Tetris</h3><div class="type">Puzzle</div></div></div>
+          <p>Arrange falling blocks and clear complete lines.</p><a href="https://tetris.com/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+        <article class="card" data-kind="game" data-search="sonic game adventure">
+          <div class="card-top"><div class="app-icon" style="--tint:#e8f5ff">💨</div><div><h3>Sonic the Hedgehog</h3><div class="type">Platform adventure</div></div></div>
+          <p>Visit the world of the speedy blue hedgehog.</p><a href="https://www.sonicthehedgehog.com/" target="_blank" rel="noopener noreferrer">Official website ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <div class="empty" id="empty">No matching apps or games found. Try another search.</div>
+    <aside class="note" id="about"><strong>About Google World:</strong> This is an independent fan-made directory for discovering apps and games. It is not affiliated with, endorsed by, or sponsored by Google or the game publishers. App and game names belong to their respective owners. Always use official websites and follow their age and safety rules.</aside>
+  </main>
+  <footer>Made with ✨ for curious explorers · <strong>Google World</strong> · 2026</footer>
+
+  <script>
+    const search = document.getElementById('search');
+    const filters = [...document.querySelectorAll('.filter')];
+    const cards = [...document.querySelectorAll('.card')];
+    const empty = document.getElementById('empty');
+    let activeFilter = 'all';
+
+    function updateCards() {
+      const term = search.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(card => {
+        const matchesType = activeFilter === 'all' || card.dataset.kind === activeFilter;
+        const haystack = (card.innerText + ' ' + (card.dataset.search || '')).toLowerCase();
+        const matchesSearch = haystack.includes(term);
+        const show = matchesType && matchesSearch;
+        card.style.display = show ? 'flex' : 'none';
+        if (show) visible++;
+      });
+      document.querySelectorAll('section[id="apps"], section[id="games"]').forEach(section => {
+        const hasVisible = [...section.querySelectorAll('.card')].some(card => card.style.display !== 'none');
+        section.style.display = hasVisible ? 'block' : 'none';
+      });
+      empty.style.display = visible ? 'none' : 'block';
+    }
+
+    filters.forEach(button => button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter;
+      filters.forEach(item => item.classList.toggle('active', item === button));
+      updateCards();
+    }));
+    search.addEventListener('input', updateCards);
+  </script>
+</body>
+</html>
